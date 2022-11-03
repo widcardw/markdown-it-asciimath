@@ -59,7 +59,7 @@ const AmIt: MarkdownIt.PluginWithOptions = (md, options: AmItOptions = {}) => {
         return `<p>${katex.renderToString(tex, { displayMode: true, throwOnError: false })}</p>`
       }
       catch (err) {
-        return `<pre>${err}</pre>`
+        return `<pre style="white-space: normal; background-color: #7f7f7f18; padding: 0.5rem;">${err}</pre>`
       }
     }
     return temp(tokens, index, options, env, slf)

@@ -12,6 +12,14 @@ npm install -D @widcardw/markdown-it-asciimath
 
 ## Usage
 
+Don't forget to add style to your CSS entry.
+
+```css
+@import 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.15.3/katex.min.css';
+```
+
+Then you can attach it to markdown-it. 
+
 ```ts
 import AmIt from '@widcardw/markdown-it-asciimath'
 import MarkdownIt from 'markdown-it'
