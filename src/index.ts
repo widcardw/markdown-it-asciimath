@@ -17,27 +17,47 @@ interface AmItOptions {
   /**
    * Token info of codeblock
    *
-   * @default 'asciimath'
+   * @default ['am', 'asciimath']
    */
-  block?: string
+  block?: string | string[]
 }
 
-type RestrictAmItOptions = Required<AmItOptions>
+interface RestrictAmItOptions extends Required<AmItOptions> {
+  block: string[]
+}
 
 function resolveOptions(options: AmItOptions): RestrictAmItOptions {
-  const resolved: RestrictAmItOptions = {
+  const resolved: RestrictAmItOptions /* default options */ = {
     inline: {
       open: '``', close: '``',
     },
-    block: 'asciimath',
-    ...options,
+    block: ['asciimath', 'am'],
+  }
+
+  if (options.inline?.open?.trim())
+    resolved.inline.open = options.inline.open.trim()
+
+  if (options.inline?.close?.trim())
+    resolved.inline.close = options.inline.close.trim()
+
+  if (options.block) {
+    if (typeof options.block === 'string')
+      resolved.block = [options.block]
+
+    else if (Array.isArray(options.block) && options.block.length >= 1)
+      resolved.block = options.block
   }
 
   return resolved
 }
 
 function am_inline(tex: string) {
-  return katex.renderToString(tex, { throwOnError: false })
+  try {
+    return katex.renderToString(tex, { throwOnError: false })
+  }
+  catch (err) {
+    return `<pre style="white-space: normal; background-color: #7f7f7f18; padding: 0.5rem;">${err}</pre>`
+  }
 }
 
 const AmIt: MarkdownIt.PluginWithOptions = (md, options: AmItOptions = {}) => {
@@ -50,9 +70,9 @@ const AmIt: MarkdownIt.PluginWithOptions = (md, options: AmItOptions = {}) => {
   md.renderer.rules.fence = (tokens, index, options, env, slf) => {
     const token = tokens[index]
 
-    // recognize ```asciimath
-    //              ^^^^^^^^^
-    if (token.info.trim() === o.block) {
+    // recognize ```asciimath or ```am
+    //              ^^^^^^^^^       ^^
+    if (o.block.includes(token.info.trim())) {
       try {
         const content = token.content.trim()
         const tex = asciimath.am2tex(content)

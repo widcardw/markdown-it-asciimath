@@ -27,9 +27,11 @@ import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt()
 md.use(AmIt, {
   /**
-   * (Optional, @default 'asciimath' )
+   * (Optional, @default ['asciimath', 'am'] )
+   * to recognize codeblocks written with syntax of asciimath
+   * You can add other alias like `math` and so on
    */
-  block: 'asciimath', // to recognize codeblocks written with syntax of asciimath
+  block: ['asciimath', 'am'],
   /**
    * (Optional @default { open: '``', close: '``' } )
    *
