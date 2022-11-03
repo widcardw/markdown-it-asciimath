@@ -1,7 +1,7 @@
 {
   "name": "@widcardw/markdown-it-asciimath",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "packageManager": "pnpm@7.12.0",
   "description": "",
   "author": "widcardw <widcardw@foxmail.com>",
