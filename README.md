@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/markdown-it-asciimath?color=a1b858&label=)](https://www.npmjs.com/package/markdown-it-asciimath)
 
-Render asciimath formulas within markdown. Based on [`asciimath-js`](https://github.com/zmx0142857/asciimath-js) and [`katex`](https://katex.org). 
+Render asciimath formulas within markdown. Based on [`asciimath-js`](https://github.com/zmx0142857/asciimathml) and [`katex`](https://katex.org). 
 
 ## Install
 
@@ -25,7 +25,7 @@ md.use(AmIt, {
   /**
    * (Optional @default { open: '``', close: '``' } )
    *
-   * to recognize formulas of ``x/y``
+   * to recognize formulas like ``x/y``
    */
   inline: {
     open: '``',
