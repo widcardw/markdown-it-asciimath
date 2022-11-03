@@ -37,7 +37,7 @@ function resolveOptions(options: AmItOptions): RestrictAmItOptions {
 }
 
 function am_inline(tex: string) {
-  return katex.renderToString(tex)
+  return katex.renderToString(tex, { throwOnError: false })
 }
 
 const AmIt: MarkdownIt.PluginWithOptions = (md, options: AmItOptions = {}) => {
@@ -56,7 +56,7 @@ const AmIt: MarkdownIt.PluginWithOptions = (md, options: AmItOptions = {}) => {
       try {
         const content = token.content.trim()
         const tex = asciimath.am2tex(content)
-        return `<p>${katex.renderToString(tex, { displayMode: true })}</p>`
+        return `<p>${katex.renderToString(tex, { displayMode: true, throwOnError: false })}</p>`
       }
       catch (err) {
         return `<pre>${err}</pre>`
