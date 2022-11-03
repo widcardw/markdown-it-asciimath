@@ -1,6 +1,6 @@
 # markdown-it-asciimath
 
-[![NPM version](https://img.shields.io/npm/v/markdown-it-asciimath?color=a1b858&label=)](https://www.npmjs.com/package/markdown-it-asciimath)
+[![NPM version](https://img.shields.io/npm/v/@widcardw/markdown-it-asciimath?color=a1b858&label=)](https://www.npmjs.com/package/@widcardw/markdown-it-asciimath)
 
 Render asciimath formulas within markdown. Based on [`asciimath-js`](https://github.com/zmx0142857/asciimathml) and [`katex`](https://katex.org). 
 
