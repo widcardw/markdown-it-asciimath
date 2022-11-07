@@ -28,19 +28,27 @@ const md = new MarkdownIt()
 md.use(AmIt, {
   /**
    * (Optional, @default ['asciimath', 'am'] )
-   * to recognize codeblocks written with syntax of asciimath
+   *
+   * To recognize codeblocks written with syntax of asciimath
    * You can add other alias like `math` and so on
    */
-  block: ['asciimath', 'am'],
+  block: ['asciimath', 'am', 'math'],
   /**
    * (Optional @default { open: '``', close: '``' } )
    *
-   * to recognize formulas like ``x/y``
+   * To recognize formulas like ``x/y``
    */
   inline: {
     open: '``',
     close: '``'
-  }
+  },
+  /**
+   * (Optional @default false )
+   *
+   * Whether to enable original Katex (wrapped with `$` for inline and `$$` for block).
+   * When enabled, you do not have to install another plugin `markdown-it-new-katex`.
+   */
+  enableOriginalKatex: true
 })
 ```
 
