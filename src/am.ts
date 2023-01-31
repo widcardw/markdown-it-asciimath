@@ -1,10 +1,11 @@
 import type MarkdownIt from 'markdown-it'
 import katex from 'katex'
-// @ts-expect-error type declaration
-import asciimath from 'asciimath-js'
+import { AsciiMath } from 'asciimath-parser'
 import type Token from 'markdown-it/lib/token'
 import type StateInline from 'markdown-it/lib/rules_inline/state_inline'
 import type { RestrictAmItOptions } from './types'
+
+const am = new AsciiMath()
 
 function amBlockRenderer(md: MarkdownIt, o: RestrictAmItOptions) {
   const temp = md.renderer.rules.fence!.bind(md.renderer.rules)
@@ -16,7 +17,7 @@ function amBlockRenderer(md: MarkdownIt, o: RestrictAmItOptions) {
     if (o.block.includes(token.info.trim())) {
       try {
         const content = token.content.trim()
-        const tex = asciimath.am2tex(content)
+        const tex = am.toTex(content)
         return `<p>${katex.renderToString(tex, { displayMode: true, throwOnError: false })}</p>`
       }
       catch (err) {
@@ -72,7 +73,7 @@ function amInlineGenerator(o: RestrictAmItOptions) {
     // render inline tex
     if (!silent) {
       const content = state.src.slice(start, match)
-      const tex = asciimath.am2tex(content)
+      const tex = am.toTex(content)
 
       // push token `am_inline` into token stream
       // which is schedule to be processed by the rule `am_inline`
