@@ -10,7 +10,7 @@ importers:
       '@types/katex': ^0.14.0
       '@types/markdown-it': ^12.2.3
       '@types/node': ^18.7.18
-      asciimath-parser: ^0.2.2
+      asciimath-parser: ^0.3.8
       bumpp: ^8.2.1
       eslint: ^8.23.1
       esno: ^0.16.3
@@ -29,7 +29,7 @@ importers:
       '@types/katex': 0.14.0
       '@types/markdown-it': 12.2.3
       '@types/node': 18.7.18
-      asciimath-parser: 0.2.2
+      asciimath-parser: 0.3.8
       bumpp: 8.2.1
       eslint: 8.23.1
       esno: 0.16.3
@@ -843,8 +843,8 @@ packages:
       es-shim-unscopables: 1.0.0
     dev: true
 
-  /asciimath-parser/0.2.2:
-    resolution: {integrity: sha512-QY0c04efodoL5f/c28I7omCNotk9XqPsJdB0sB1B9f1FvyrwGZ6/AdGpvIMn/nMGymfJoxis7Zqu9dsMFnTjUw==}
+  /asciimath-parser/0.3.8:
+    resolution: {integrity: sha512-ybQ4vpdiLotQCevkIetnDCIze/KMOerrUNkeGAOGi1EkyIs7D6wsm0hK6VT7neeu+JlkilqcVuWHxfvNdY/vJA==}
     dev: true
 
   /assertion-error/1.1.0:
