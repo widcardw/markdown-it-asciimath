@@ -60,6 +60,9 @@ function amInlineGenerator(o: RestrictAmItOptions) {
       match += 1
     }
 
+    if (start >= match)
+      return false
+
     // does not match
     if (match === -1) {
       if (!silent)
