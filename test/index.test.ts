@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
 import AmIt from '../src/index'
+// @ts-expect-error no type
+import Attrs from 'markdown-it-attrs'
 
 describe('instance', () => {
   it('should create instance of md', () => {
@@ -73,6 +75,36 @@ describe('am and katex', () => {
 
     expect(md.render('`$\\$`')).toMatchInlineSnapshot(`
       "<p><code>$\\\\$</code></p>
+      "
+    `)
+  })
+})
+
+describe('with mdit attrs', () => {
+  const md = new MarkdownIt()
+  md.use(AmIt, { enableOriginalKatex: true })
+  md.use(Attrs)
+  it('should render ``a+b``', () => {
+    const text = 'Some text and formula ``a+b``\n\nEnd of text'
+    expect(md.render(text)).toMatchInlineSnapshot(`
+      "<p>Some text and formula <span class=\\"katex\\"><span class=\\"katex-mathml\\"><math xmlns=\\"http://www.w3.org/1998/Math/MathML\\"><semantics><mrow><mstyle scriptlevel=\\"0\\" displaystyle=\\"true\\"><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mstyle></mrow><annotation encoding=\\"application/x-tex\\">\\\\displaystyle{ a + b }</annotation></semantics></math></span><span class=\\"katex-html\\" aria-hidden=\\"true\\"><span class=\\"base\\"><span class=\\"strut\\" style=\\"height:0.7778em;vertical-align:-0.0833em;\\"></span><span class=\\"mord\\"><span class=\\"mord mathnormal\\">a</span><span class=\\"mspace\\" style=\\"margin-right:0.2222em;\\"></span><span class=\\"mbin\\">+</span><span class=\\"mspace\\" style=\\"margin-right:0.2222em;\\"></span><span class=\\"mord mathnormal\\">b</span></span></span></span></span></p>
+      <p>End of text</p>
+      "
+    `)
+  })
+
+  it('should render single formula', () => {
+    const text = '``a+b``'
+    expect(md.render(text)).toMatchInlineSnapshot(`
+      "<p><span class=\\"katex\\"><span class=\\"katex-mathml\\"><math xmlns=\\"http://www.w3.org/1998/Math/MathML\\"><semantics><mrow><mstyle scriptlevel=\\"0\\" displaystyle=\\"true\\"><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mstyle></mrow><annotation encoding=\\"application/x-tex\\">\\\\displaystyle{ a + b }</annotation></semantics></math></span><span class=\\"katex-html\\" aria-hidden=\\"true\\"><span class=\\"base\\"><span class=\\"strut\\" style=\\"height:0.7778em;vertical-align:-0.0833em;\\"></span><span class=\\"mord\\"><span class=\\"mord mathnormal\\">a</span><span class=\\"mspace\\" style=\\"margin-right:0.2222em;\\"></span><span class=\\"mbin\\">+</span><span class=\\"mspace\\" style=\\"margin-right:0.2222em;\\"></span><span class=\\"mord mathnormal\\">b</span></span></span></span></span></p>
+      "
+    `)
+  })
+
+  it('should render katex', () => {
+    const text = '$\\displaystyle{ a + b }$'
+    expect(md.render(text)).toMatchInlineSnapshot(`
+      "<p><span class=\\"katex\\"><span class=\\"katex-mathml\\"><math xmlns=\\"http://www.w3.org/1998/Math/MathML\\"><semantics><mrow><mstyle scriptlevel=\\"0\\" displaystyle=\\"true\\"><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mstyle></mrow><annotation encoding=\\"application/x-tex\\">\\\\displaystyle{ a + b }</annotation></semantics></math></span><span class=\\"katex-html\\" aria-hidden=\\"true\\"><span class=\\"base\\"><span class=\\"strut\\" style=\\"height:0.7778em;vertical-align:-0.0833em;\\"></span><span class=\\"mord\\"><span class=\\"mord mathnormal\\">a</span><span class=\\"mspace\\" style=\\"margin-right:0.2222em;\\"></span><span class=\\"mbin\\">+</span><span class=\\"mspace\\" style=\\"margin-right:0.2222em;\\"></span><span class=\\"mord mathnormal\\">b</span></span></span></span></span></p>
       "
     `)
   })

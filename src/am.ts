@@ -65,11 +65,7 @@ function amInlineGenerator(o: RestrictAmItOptions) {
 
     // does not match
     if (match === -1) {
-      if (!silent)
-        state.pending += close
-
       state.pos = start
-
       return false
     }
 
@@ -80,8 +76,8 @@ function amInlineGenerator(o: RestrictAmItOptions) {
 
       // push token `am_inline` into token stream
       // which is schedule to be processed by the rule `am_inline`
-      token = state.push('am_inline', 'math', 0)
-      token.markup = open
+      token = state.push('math_inline', 'math', 0)
+      token.markup = '$'
       token.content = tex
     }
 
