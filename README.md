@@ -7,8 +7,7 @@ Render asciimath formulas within markdown. Based on [`asciimath-parser`](https:/
 ## Install
 
 ```sh
-npm i -D @widcardw/markdown-it-asciimath
-npm i -D katex
+npm i -D katex @widcardw/markdown-it-asciimath
 ```
 
 ## Usage
