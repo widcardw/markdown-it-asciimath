@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
-import AmIt from '../src/index'
 // @ts-expect-error no type
 import Attrs from 'markdown-it-attrs'
+import AmIt from '../src/index'
 
 describe('instance', () => {
   it('should create instance of md', () => {
